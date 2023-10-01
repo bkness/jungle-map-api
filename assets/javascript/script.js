@@ -34,6 +34,7 @@ var data = {
   if (!authCode) {
     console.error('Authorization code not found.');
   } else {
+    var tokenUrl = 'https://accounts.spotify.com/api/token';
   //method is used to request the token to enpoint  token to exchange auth code for auth token
   //post request which sends token for exchange of access/authorization
   fetch(tokenUrl, {
@@ -59,7 +60,7 @@ var data = {
       .then(response => response.json())
       .then(data => {
         // this will take the API response
-        consolelog(data);
+        console.log(data);
       })
 
       // Use the access token to make requests to the Spotify API
