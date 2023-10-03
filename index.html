@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jungle Map</title>
+</head>
+<body>
+  <h1>Jungle Map</h1>
+  <div id="live-scores-container">
+    <h2>Live Football Scores</h2>
+    <ul id="live-scores">
+      <!-- Live football scores will be dynamically added here -->
+    </ul>
+  </div>
+
+  <div id="past-matches-container">
+    <h2>Past Football Matches</h2>
+    <ul id="past-matches">
+      <!-- Past football matches will be dynamically added here -->
+    </ul>
+  </div>
+
+  <div id="upcoming-games-container">
+    <h2>Upcoming Football Games</h2>
+    <ul id="upcoming-games">
+      <!-- Upcoming football games will be dynamically added here -->
+    </ul>
+  </div>
+
+  <div id="football-container">
+    <h2>Football Stats</h2>
+    <ul id="football-stats">
+      <!-- Football stats will be dynamically added here -->
+    </ul>
+  </div>
+  <script>
+    // Function to add the "Join Now" form dynamically
+    function addJoinNowForm() {
+      setTimeout(function() {
+        var joinNowSection = document.getElementById("join-now");
+        
+        var form = document.createElement("form");
+        form.id = "joinNowForm";
+        
+        var nameLabel = document.createElement("label");
+        nameLabel.textContent = "Name:";
+        var nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.required = true;
+        
+        var phoneLabel = document.createElement("label");
+        phoneLabel.textContent = "Phone Number:";
+        var phoneInput = document.createElement("input");
+        phoneInput.type = "tel";
+        phoneInput.required = true;
+        
+        var emailLabel = document.createElement("label");
+        emailLabel.textContent = "Email Address:";
+        var emailInput = document.createElement("input");
+        emailInput.type = "email";
+        emailInput.required = true;
+        
+        var zipLabel = document.createElement("label");
+        zipLabel.textContent = "Zip Code:";
+        var zipInput = document.createElement("input");
+        zipInput.type = "text";
+        zipInput.required = true;
+        
+        var submitButton = document.createElement("button");
+        submitButton.type = "submit";
+        submitButton.textContent = "Join Now";
+        
+        form.appendChild(nameLabel);
+        form.appendChild(nameInput);
+        form.appendChild(phoneLabel);
+        form.appendChild(phoneInput);
+        form.appendChild(emailLabel);
+        form.appendChild(emailInput);
+        form.appendChild(zipLabel);
+        form.appendChild(zipInput);
+        form.appendChild(submitButton);
+        
+        joinNowSection.appendChild(form);
+      }, 3000); // Delay for 3 seconds before adding the form
+    }
+    
+    // Call the function to add the "Join Now" form
+    addJoinNowForm();
+  </script>
+</head>
+<body>
+<section id="join-now">
+    <h2>Join Now</h2>
+    <p>Sign up today to access exclusive content and benefits!</p>
+    <button>Join Now</button>
+  </section>
+<header>
+    <h1>Jungle Map</h1>
+</header>
+
+
+  <script>
+    // Fetch live football scores
+    fetch('https://api.example.com/football/live-scores')
+      .then(response => response.json())
+      .then(data => {
+        const liveScoresList = document.getElementById('live-scores');
+        data.forEach(score => {
+          const listItem = document.createElement('li');
+          listItem.textContent = score;
+          liveScoresList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching live football scores:', error);
+      });
+
+    // Fetch past football matches
+    fetch('https://api.example.com/football/past-matches')
+      .then(response => response.json())
+      .then(data => {
+        const pastMatchesList = document.getElementById('past-matches');
+        data.forEach(match => {
+          const listItem = document.createElement('li');
+          listItem.textContent = match;
+          pastMatchesList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching past football matches:', error);
+      });
+
+    // Fetch upcoming football games
+    fetch('https://api.example.com/football/upcoming-games')
+      .then(response => response.json())
+      .then(data => {
+        const upcomingGamesList = document.getElementById('upcoming-games');
+        data.forEach(game => {
+          const listItem = document.createElement('li');
+          listItem.textContent = game;
+          upcomingGamesList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching upcoming football games:', error);
+      });
+
+    // Fetch football stats
+    fetch('https://api.example.com/football/stats')
+      .then(response => response.json())
+      .then(data => {
+        const footballStatsList = document.getElementById('football-stats');
+        data.forEach(stat => {
+          const listItem = document.createElement('li');
+          listItem.textContent = stat;
+          footballStatsList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching football stats:', error);
+      });
+
+
