@@ -1,79 +1,79 @@
-$(document).ready(function() {
+
+/*(async() => {
+var url = 'https://api-basketball.p.rapidapi.com/statistics?season=2019-2020&league=12&team=133';
+var options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '3658930d88msh914f6e850e00bbcp1478ddjsnc67b9db401a9',
+		'X-RapidAPI-Host': 'api-basketball.p.rapidapi.com'
+	}
+};
+
+try {
+	var response = await fetch(url, options);
+	var data = await response.json();
+	console.log(data);
+} catch (error) {
+	console.error(error); 
+}})()
+
+*/
+/* test to go off of is above */
 
 
+// JavaScript code to fetch team statistics from the API
 
-var client_id = 'CLIENT ID';
-var redirect_Uri = 'www.google.com'; //needs to be changed when we know our websites name
-var scope = 'user-read-private user-read-email'; // Specify the required scopes need to figure out scopes we need
-var authorizeUrl = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${encodeURIComponent(redirect_Uri)}&scope=${encodeURIComponent(scope)}`;
-var clientSecret = 'YOUR_CLIENT_SECRET';
-var authCode = "";
-var accessToken = "";
+// Define your RapidAPI key and host
+var rapidAPIKey = '3658930d88msh914f6e850e00bbcp1478ddjsnc67b9db401a9';
+var rapidAPIHost = 'api-basketball.p.rapidapi.com';
 
+// Function to fetch team statistics
+function fetchTeamStatistics(year, teamId) {
+  // Define the API endpoint URL
+  var apiUrl = `https://api-basketball.p.rapidapi.com/statistics?season=${year}&league=12&team=${teamId}`;
 
-//back to authoirzation URL
-window.location.href = authorizeUrl;//will take user to login to spotify and grat permission
-var authCode = "AUTHORIZATION_CODE" //AUTH FROM REDIRECT URL need to figure out how to get this
-//extraction of auth code should preferably done after bing redirected
-var tokenUrl = 'https://accounts.spotify.com/api/token';
+  // Make the API request
+  fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': rapidAPIKey,
+      'X-RapidAPI-Host': rapidAPIHost,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the API response data here
+      displayTeamStatistics(data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+}
 
+// Function to display team statistics
+function displayTeamStatistics(data) {
+  // Assuming you have a DOM element with id "team-info" where you want to display the statistics
+  var teamInfoElement = document.getElementById('team-info'); // needs to be changed to match html if changed?
 
+  // checking api response for data
+  if (data && data.response) {
+    // take the data statistics
+    var statistics = data.response;
 
- //define data object for the token request as spotify api uses
-var data = {
-    grant_type: 'authorization_code',
-    code: authCode, //needs actual code for auth
-    redirect_uri: redirect_Uri,
-  };
+    // You can access the statistics properties here and format them as needed
+    // For example: const pointsPerGame = statistics.points;
 
-  
-  var headers = {
-    'Authorization': `Basic ${btoa(`${client_id}:${clientSecret}`)}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
-  };
-  if (!authCode) {
-    console.error('Authorization code not found.');
+    // Update the "team-info" element with the statistics
+    // Example that i can think of teamInfoElement.innerHTML = `Points Per Game: ${pointsPerGame}`;
   } else {
-    var tokenUrl = 'https://accounts.spotify.com/api/token';
-  //method is used to request the token to enpoint  token to exchange auth code for auth token
-  //post request which sends token for exchange of access/authorization
-  fetch(tokenUrl, {
-    method: 'POST',
-    body: new URLSearchParams(data),
-    headers: headers,
-  })
-  //preps for the request to go through. parse JSON then if successful it will set our token and expiresIn variables.
-    .then(response => response.json())
-    .then(data => {
-      accessToken = data.access_token;
-      /*possibly store these for future requests in case of timeout??????*/
+    teamInfoElement.innerHTML = 'No statistics available for this team and year.';
+  }
+}
+
+// Example usage:
+var selectedYear = '2019-2020'; // selected year
+var selectedTeamId = '133'; // Desired ID for team
+
+fetchTeamStatistics(selectedYear, selectedTeamId);
 
 
-      var apiUrl = 'https://api.spotify.com/v1/me';
-
-      fetch(apiUrl, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },//access token obtained is in the header as Authorization
-        //then gewt be processed as needed
-      })
-      .then(response => response.json())
-      .then(data => {
-        // this will take the API response
-        console.log(data);
-      })
-
-      // Use the access token to make requests to the Spotify API
-      // Store the access token and expiration time as needed
-  
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
-    });
-
-    
