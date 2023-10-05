@@ -1,0 +1,68 @@
+/* Reset default browser styles */
+body, h1, h2, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Header styles */
+header {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Main content styles */
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* Footer styles */
+footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Typography styles */
+h1 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Add more styles as needed */

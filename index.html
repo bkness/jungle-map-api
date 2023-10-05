@@ -4,161 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jungle Map</title>
-</head>
-<body>
-  <h1>Jungle Map</h1>
-  <div id="live-scores-container">
-    <h2>Live Football Scores</h2>
-    <ul id="live-scores">
-      <!-- Live football scores will be dynamically added here -->
-    </ul>
-  </div>
-
-  <div id="past-matches-container">
-    <h2>Past Football Matches</h2>
-    <ul id="past-matches">
-      <!-- Past football matches will be dynamically added here -->
-    </ul>
-  </div>
-
-  <div id="upcoming-games-container">
-    <h2>Upcoming Football Games</h2>
-    <ul id="upcoming-games">
-      <!-- Upcoming football games will be dynamically added here -->
-    </ul>
-  </div>
-
-  <div id="football-container">
-    <h2>Football Stats</h2>
-    <ul id="football-stats">
-      <!-- Football stats will be dynamically added here -->
-    </ul>
-  </div>
-  <script>
-    // Function to add the "Join Now" form dynamically
-    function addJoinNowForm() {
-      setTimeout(function() {
-        var joinNowSection = document.getElementById("join-now");
-        
-        var form = document.createElement("form");
-        form.id = "joinNowForm";
-        
-        var nameLabel = document.createElement("label");
-        nameLabel.textContent = "Name:";
-        var nameInput = document.createElement("input");
-        nameInput.type = "text";
-        nameInput.required = true;
-        
-        var phoneLabel = document.createElement("label");
-        phoneLabel.textContent = "Phone Number:";
-        var phoneInput = document.createElement("input");
-        phoneInput.type = "tel";
-        phoneInput.required = true;
-        
-        var emailLabel = document.createElement("label");
-        emailLabel.textContent = "Email Address:";
-        var emailInput = document.createElement("input");
-        emailInput.type = "email";
-        emailInput.required = true;
-        
-        var zipLabel = document.createElement("label");
-        zipLabel.textContent = "Zip Code:";
-        var zipInput = document.createElement("input");
-        zipInput.type = "text";
-        zipInput.required = true;
-        
-        var submitButton = document.createElement("button");
-        submitButton.type = "submit";
-        submitButton.textContent = "Join Now";
-        
-        form.appendChild(nameLabel);
-        form.appendChild(nameInput);
-        form.appendChild(phoneLabel);
-        form.appendChild(phoneInput);
-        form.appendChild(emailLabel);
-        form.appendChild(emailInput);
-        form.appendChild(zipLabel);
-        form.appendChild(zipInput);
-        form.appendChild(submitButton);
-        
-        joinNowSection.appendChild(form);
-      }, 3000); // Delay for 3 seconds before adding the form
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Media query for screens with a maximum width of 600px (mobile devices) */
+    @media screen and (max-width: 550px) {
+      /* Adjust styles for mobile devices */
+      body {
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      /* Add more styles as needed */
     }
-    
-    // Call the function to add the "Join Now" form
-    addJoinNowForm();
-  </script>
+  </style>
 </head>
 <body>
-<section id="join-now">
-    <h2>Join Now</h2>
-    <p>Sign up today to access exclusive content and benefits!</p>
-    <button>Join Now</button>
-  </section>
-<header>
+  <header>
     <h1>Jungle Map</h1>
-</header>
+  </header>
 
+  <main>
+    <section id="live-scores-container">
+      <h2>Live Basketball Scores</h2>
+      <ul id="live-scores">
+        <!-- Live basketball scores will be dynamically added here -->
+      </ul>
+    </section>
 
+    <section id="past-matches-container">
+      <h2>Past Basketball Matches</h2>
+      <ul id="past-matches">
+        <!-- Past basketball matches will be dynamically added here -->
+      </ul>
+    </section>
+
+    <section id="upcoming-games-container">
+      <h2>Upcoming Basketball Games</h2>
+      <ul id="upcoming-games">
+        <!-- Upcoming basketball games will be dynamically added here -->
+      </ul>
+    </section>
+
+    <section id="basketball-container">
+      <h2>Basketball Stats</h2>
+      <ul id="basketball-stats">
+        <!-- Basketball stats will be dynamically added here -->
+      </ul>
+    </section>
+
+    <section id="comments-container">
+      <h2>Comments</h2>
+      <form id="comment-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" autocomplete="name" required>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" autocomplete="comment" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="comments-list">
+        <!-- Comments will be dynamically added here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Jungle Map. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
   <script>
-    // Fetch live football scores
-    fetch('https://api.example.com/football/live-scores')
-      .then(response => response.json())
-      .then(data => {
-        const liveScoresList = document.getElementById('live-scores');
-        data.forEach(score => {
-          const listItem = document.createElement('li');
-          listItem.textContent = score;
-          liveScoresList.appendChild(listItem);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching live football scores:', error);
+    // Add event listener to the comment form
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the values from the form inputs
+      var nameInput = document.getElementById('name');
+      var commentInput = document.getElementById('comment');
+      var name = nameInput.value;
+      var comment = commentInput.value;
+
+      // Create a comment object
+      var newComment = {
+        name: name,
+        comment: comment
+      };
+
+      // Save the comment to local storage
+      var comments = JSON.parse(localStorage.getItem('comments')) || [];
+      comments.push(newComment);
+      localStorage.setItem('comments', JSON.stringify(comments));
+
+      // Clear the form inputs
+      nameInput.value = '';
+      commentInput.value = '';
+
+      // Refresh the comments list
+      displayComments();
+    });
+
+    // Function to display comments from local storage
+    function displayComments() {
+      var comments = JSON.parse(localStorage.getItem('comments')) || [];
+      var commentsList = document.getElementById('comments-list');
+      commentsList.innerHTML = '';
+
+      comments.forEach(function(comment) {
+        var commentItem = document.createElement('div');
+        var nameElement = document.createElement('strong');
+        nameElement.textContent = comment.name;
+        commentItem.appendChild(nameElement);
+        commentItem.appendChild(document.createTextNode(' ' + comment.comment));
+        commentsList.appendChild(commentItem);
       });
+    }
 
-    // Fetch past football matches
-    fetch('https://api.example.com/football/past-matches')
-      .then(response => response.json())
-      .then(data => {
-        const pastMatchesList = document.getElementById('past-matches');
-        data.forEach(match => {
-          const listItem = document.createElement('li');
-          listItem.textContent = match;
-          pastMatchesList.appendChild(listItem);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching past football matches:', error);
-      });
-
-    // Fetch upcoming football games
-    fetch('https://api.example.com/football/upcoming-games')
-      .then(response => response.json())
-      .then(data => {
-        const upcomingGamesList = document.getElementById('upcoming-games');
-        data.forEach(game => {
-          const listItem = document.createElement('li');
-          listItem.textContent = game;
-          upcomingGamesList.appendChild(listItem);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching upcoming football games:', error);
-      });
-
-    // Fetch football stats
-    fetch('https://api.example.com/football/stats')
-      .then(response => response.json())
-      .then(data => {
-        const footballStatsList = document.getElementById('football-stats');
-        data.forEach(stat => {
-          const listItem = document.createElement('li');
-          listItem.textContent = stat;
-          footballStatsList.appendChild(listItem);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching football stats:', error);
-      });
-
-
+    // Call the function to display comments on page load
+    displayComments();
+  </script>
+</body>
+</html>
