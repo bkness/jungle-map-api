@@ -36,6 +36,56 @@
         </div>
     </div>
 
+
+    <dialog id="theModal">
+            <form method="dialog">
+            <p>
+                <label for="favTeam"> Favorite NFL Team: </label>
+                <select name="favTeam" id="favTeam">
+                    <option></option>
+                    <option>Arizona Cardinals</option>
+                    <option>Atlanta Falcons</option>
+                    <option>Baltimore Ravens</option>
+                    <option>Buffalo Bills</option>
+                    <option>Carolina Panthers</option>
+                    <option>Chicago Bears</option>
+                    <option>Cincinnati Bengals</option>
+                    <option>Cleveland Browns</option>
+                    <option>Dallas Cowboys</option>
+                    <option>Denver Broncos</option>
+                    <option>Detroit Lions</option>
+                    <option>Green Bay Packers</option>
+                    <option>Houston Texans</option>
+                    <option>Indianapolis Colts</option>
+                    <option>Jacksonville Jaguars</option>
+                    <option>Kansas City Chiefs</option>
+                    <option>Las Vegas Raiders</option>
+                    <option>Los Angeles Chargers</option>
+                    <option>Los Angeles Rams</option>
+                    <option>Miami Dolphins</option>
+                    <option>Minnesota Vikings/option>
+                    <option>New England Patriots</option>
+                    <option>New Orleans Saints</option>
+                    <option>New York Giants</option>
+                    <option>New York Jets</option>
+                    <option>Philadelphia Eagles</option>
+                    <option>Pittsburgh Steelers</option>
+                    <option>San Francisco 49ers</option>
+                    <option>Seattle Seahawks</option>
+                    <option>Tampa Bay Buccaneers</option>
+                    <option>Tennessee Titans</option>
+                    <option>Washington Commanders</option>
+                </select>
+            </p>
+            <div>
+                <button id="cancel" type="reset">Cancel</button>
+                <button id="confirm">Confirm</button>
+            </div>
+        </form>
+</dialog>
+<div>
+    <button id="updateTeam">Update Favorite Team</button>
+</div>
     <!-- Right Display Block for Team Information -->
     <div class="flex-1 p-4">
         <!-- Display Team Information Here -->
@@ -46,8 +96,9 @@
             <p>Wins All: </p>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <script src="assets/javascript/script.js"></script>
+    <script src="./assets/javascript/script.js"></script>
 </body>
 
 </html>
