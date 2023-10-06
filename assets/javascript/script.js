@@ -44,6 +44,7 @@ function fetchTeamStatistics(year, teamId) {
     .then((data) => {
       // Handle the API response data here
       displayTeamStatistics(data);
+      console.log(data)
     })
     .catch((error) => {
       console.error('Error fetching data:', error);
@@ -70,10 +71,45 @@ function displayTeamStatistics(data) {
   }
 }
 
+function displayTeamStatistics(data) {
+  var teamInfoElement = document.getElementById('team-info');
+
+  if (data && data.response) {
+    var statistics = data.response;
+
+    var gamesPlayedHome = statistics.games.played.home;
+    var gamesPlayedAway = statistics.games.played.away;
+    var gamesPlayedAll = statistics.games.played.all;
+    
+    var winsHome = statistics.games.wins.home.total;  // Assuming 'total' is the relevant property
+    var winsAway = statistics.games.wins.away.total;  // Assuming 'total' is the relevant property
+    var winsAll = statistics.games.wins.all.total;    // Assuming 'total' is the relevant property
+    
+
+    var teamName = statistics.team.name;
+    var teamLogoUrl = statistics.team.logo;
+
+    var teamInfoHTML = `
+      <h2>${teamName}</h2>
+      <img src="${teamLogoUrl}" alt="${teamName} Logo">
+      <p>Games Played at Home: ${gamesPlayedHome}</p>
+      <p>Games Played Away: ${gamesPlayedAway}</p>
+      <p>Wins All: ${winsAll}</p>
+    `;
+
+    teamInfoElement.innerHTML = teamInfoHTML;
+  } else {
+    teamInfoElement.innerHTML = 'No statistics available for this team and year.';
+  }
+}
+
+
+
+
 // Example usage:
-var selectedYear = '2019-2020'; // selected year
-var selectedTeamId = '133'; // Desired ID for team
+document.getElementById('celtics-button').addEventListener('click', function() {
+  var selectedYear = '2019-2020';
+  var selectedTeamId = '133';
 
-fetchTeamStatistics(selectedYear, selectedTeamId);
-
-
+  fetchTeamStatistics(selectedYear, selectedTeamId);
+});
