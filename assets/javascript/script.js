@@ -78,4 +78,41 @@ document.getElementById('celtics-button').addEventListener('click', function() {
   var selectedTeamId = '133';
 
   fetchTeamStatistics(selectedYear, selectedTeamId);
+
+
+
+var updateTeamBtn = document.getElementById('updateTeam');
+var cancelBtn = document.getElementById('cancel');
+var dialog = document.getElementById('theModal');
+var confirmBtn = document.getElementById('confirm')
+var dropDown = document.getElementById('favTeam');
+dialog.returnValue = "favTeam";
+
+
+
+//nodals functions
+function dialogOpen(dialog) {
+  if(dialog.open) {
+    console.log("dialog box is open.");
+  }else {
+    console.log("dialog box is closed.");
+  }
+}
+
+updateTeamBtn.addEventListener("click", () => {
+  dialog.showModal();
+  dialogOpen(dialog);
+});
+
+dropDown.addEventListener('change', function(){
+  var selectedTeam = dropDown.value;
+
+  localStorage.setItem('selectedTeam', selectedTeam);
+  console.log(selectedTeam);
+})
+cancelBtn.addEventListener('click', () => {
+  dialog.closest("no Favorite Team");
+  dialogOpen(dialog);
+});
+
 });
