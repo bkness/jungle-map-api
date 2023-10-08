@@ -4,35 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFL App</title>
+    <title>NBA Standings</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
-    <link href="assets/style/reset.css" rel="stylesheet">
-    <link href="assets/style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body class="flex h-screen bg-gray-100">
 
     <div class="w-1/4 bg-white p-4">
         <div class="mb-4">
-            <input type="text" class="w-full border p-2 rounded" placeholder="Search Basketball teams">
+            <button id="yearSelector">Select Year</button>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-image: url('./assets/images/black_logo.avif')">
+                        <span class="close">&times;</span>
+                        <h1>NBA year for standings</h1>
+                    </div>
+                    <div class="modal-body">
+                        <label for="year">Select Year:</label>
+                        <button id="submitYear">Submit</button>
+                    </div>
+                    <div class="modal-footer" style="background-image: url('./assets/images/black_logo.avif')">
+                        <h2>Button selected will display team standings for year chosen</h2>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="space-y-2">
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 1</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button> 
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
-            <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Team 2</button>
         </div>
     </div>
 
@@ -40,41 +38,11 @@
     <div class="flex-1 p-4">
         <!-- Display Team Information Here -->
         <div id="team-info" class="bg-gray-200 p-4 rounded">
-            <!-- Content will be loaded dynamically -->
+            <h2 class="teamName"></h2>
         </div>
     </div>
 
-    <script src="assets/javascript/script.js"></script>
-    <script>
-        // Get the search input element
-const searchInput = document.querySelector('input[type="text"]');
-
-// Add event listener for the input element
-searchInput.addEventListener('input', function(event) {
-  // Handle the input event
-  console.log('Search input value:', event.target.value);
-});
-
-// Get the buttons with class "bg-blue-500"
-const buttons = document.querySelectorAll('.bg-blue-500');
-
-// Add event listener for each button
-buttons.forEach(function(button) {
-  button.addEventListener('click', function(event) {
-    // Handle the click event
-    console.log('Button clicked:', event.target.textContent);
-  });
-});
-
-// Get the team info div
-const teamInfoDiv = document.getElementById('team-info');
-
-// Add event listener for the team info div
-teamInfoDiv.addEventListener('mouseover', function(event) {
-  // Handle the mouseover event
-  console.log('Mouse over team info div');
-});
-        </script>
+    <script src="./assets/javascript/script.js"></script>
 </body>
 
 </html>
