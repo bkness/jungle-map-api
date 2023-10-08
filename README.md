@@ -1,66 +1,27 @@
-# jungle-map-api
-music app to help users find and experience music
+NBA Standings Application
+This NBA Standings Application is a demonstration of our proficiency in integrating APIs to deliver accurate and relevant information to users. The application provides NBA standings for a chosen season, enhanced with engaging visuals.
 
+Features
+Year Selection: Upon page load, a modal in the top left corner allows users to choose the NBA season for which they want to view standings.
 
+Team Standings: When a team is selected, the application displays the standings for that year. Each team's statistics are presented in an organized format.
 
+Dynamic Visuals: Underneath the statistics, an animated GIF complements the data, providing an engaging user experience.
 
+Ongoing Development
+The application is a work in progress. Our current focus is on the following areas:
 
-// Define your RapidAPI key and host
-var rapidAPIKey = '3658930d88msh914f6e850e00bbcp1478ddjsnc67b9db401a9';
-var rapidAPIHost = 'api-basketball.p.rapidapi.com';
+CSS Enhancements: Continuous improvements to enhance the visual appeal and user experience.
 
-// Function to fetch team statistics
-function fetchTeamStatistics(year, teamId) {
-  // Define the API endpoint URL
-  var apiUrl = `https://api-basketball.p.rapidapi.com/statistics?season=${year}&league=12&team=${teamId}`;
+Modal Functionality: Optimizing the modal for seamless user interaction.
 
-  // Make the API request
-  fetch(apiUrl, {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': rapidAPIKey,
-      'X-RapidAPI-Host': rapidAPIHost,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // Handle the API response data here
-      displayTeamStatistics(data);
-      console.log(data)
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
-}
+Year Selection for NBA Standings: Implementing a feature to allow users to easily switch between different seasons.
 
+Dynamic GIF Display: Fine-tuning the display of animated visuals to perfectly complement the statistics.
 
- <button class="team-button" data-teamid="1">Atlanta Hawks</button>
-            <button class="team-button" data-teamid="2">Boston Celtics</button>
-            <button class="team-button" data-teamid="4">Brooklyn Nets</button>
-            <button class="team-button" data-teamid="5">Charlotte Hornets</button>
-            <button class="team-button" data-teamid="6">Chicago Bulls</button>
-            <button class="team-button" data-teamid="7">Cleveland Caveliers</button>
-            <button class="team-button" data-teamid="8">Dallas MAvericks</button>
-            <button class="team-button" data-teamid="9">Denver Nuggets</button>
-            <button class="team-button" data-teamid="10">Detroit Pistons</button>
-            <button class="team-button" data-teamid="11">Golden State Warriors</button>
-            <button class="team-button" data-teamid="14">Houston Rockets</button>
-            <button class="team-button" data-teamid="15">Indiana Pacers</button>
-            <button class="team-button" data-teamid="16">LA Clippers</button>
-            <button class="team-button" data-teamid="17">Los Angeles Lakers</button>
-            <button class="team-button" data-teamid="19">Memphis Grizzlies</button>
-            <button class="team-button" data-teamid="20">Miami Heat</button>
-            <button class="team-button" data-teamid="21">Milwauke Bucks</button>
-            <button class="team-button" data-teamid="22">Minnesota Timberwolves</button>
-            <button class="team-button" data-teamid="23">New Orleans Pelicans</button>
-            <button class="team-button" data-teamid="24">New York Knicks</button>
-            <button class="team-button" data-teamid="25">Oklahoma City Thunder</button>
-            <button class="team-button" data-teamid="26">Orlando Magic</button>
-            <button class="team-button" data-teamid="27">Philidelphia 76ers</button>
-            <button class="team-button" data-teamid="28">Phoenix Suns</button>
-            <button class="team-button" data-teamid="29">Portland Trail Blazers</button>
-            <button class="team-button" data-teamid="30">Sacremento Kings</button>
-            <button class="team-button" data-teamid="31">San Antonio Spurs</button>
-            <button class="team-button" data-teamid="38">Toronto Raptors</button>
-            <button class="team-button" data-teamid="40">Utah Jazz</button>
-            <button class="team-button" data-teamid="41">Washington Wizards</button>
+Usage
+To run this application, simply open the index.html file in your preferred web browser. The modal will guide you through selecting the desired NBA season.
+
+Here is a project screenshot of our application:![_Users_brandonkelly_Desktop_NBA-Standings_index html](https://github.com/bkness/jungle-map-api/assets/123907755/682710a2-8108-4fda-8169-d588e6253d76)
+
+*Note: This application is not affiliated with the NBA or any of its teams. It is a demonstration project for educational purposes.*
