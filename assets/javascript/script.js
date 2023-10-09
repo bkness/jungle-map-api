@@ -65,6 +65,22 @@ function createTeamButtons() {
       var teamId = this.dataset.teamid;
       // searches a team id  in the api hen a button is clicked 
       searchTeamStandings(teamId);
+
+      //Moved this to this position so when the team button is clicked it will genrate and display the gif simoltaneously and change when a new one is also
+      fetchNbaBasketballGifs(giphyApiKey, searchTerm)
+  .then((gifs) => {
+    console.log('NBA basketball GIFs:', gifs);
+    var randomIndex = Math.floor(Math.random()*gifs.length);
+    var image = gifs[randomIndex];
+    var imageEl = document.createElement('img');
+    imageEl.src = image;
+   
+    document.getElementById('gif-image').innerHTML = "";
+    document.getElementById('gif-image').append(imageEl);
+
+
+
+  });
     });
   });
 }
@@ -160,13 +176,15 @@ function fetchTeamStandings(data) {
        `;
 
     teamInfoElement.innerHTML = teamInfoHTML;
+
+    
   } else {
     teamInfoElement.innerHTML = 'No statistics available for this team and year.';
   }
 }
 
 
-function fetchNbaBasketballGifs(apiKey, searchTerm) {
+function fetchNbaBasketballGifs(giphyApiKey, searchTerm) {
   // URL for gif request thr9ough the api
   var giphyApiUrl = `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&&api_key=${giphyApiKey}`;
 
@@ -197,7 +215,4 @@ var giphyApiKey = 'ehhVqXyAm0xa78JH81Upx5S2xknqbRjl';
 var searchTerm = 'NBA basketball';
 
 
-fetchNbaBasketballGifs(giphyApiKey, searchTerm)
-  .then((gifs) => {
-    console.log('NBA basketball GIFs:', gifs);
-  });
+
