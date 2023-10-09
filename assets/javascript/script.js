@@ -74,34 +74,33 @@ function createTeamButtons() {
 document.addEventListener('DOMContentLoaded', function () {
   console.log("DOM Loaded");
   createTeamButtons();
-  // WE NEED TO INCORPORATE A YEAR FUNCTION TO MAKE OUR STANDINGS DISPLAY STANDINGS FOR YEAR SELECTED WITH MODAL
-  // Get the modal
+
   var modal = document.getElementById("myModal");
-
-  // Get the button that opens the modal
   var btn = document.getElementById("yearSelector");
-
-  // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
+  var submitYearButton = document.getElementById("submitYear");
 
-  // When the user clicks the button, open the modal 
   btn.onclick = function () {
-    console.log("button has been clickethed");
-    modal.style.display = "block";
+      modal.style.display = "block";
   }
 
-  // When the user clicks on <span> (x), close the modal
   span.onclick = function () {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
       modal.style.display = "none";
-    }
   }
 
+  window.onclick = function (event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+  submitYearButton.addEventListener('click', function () {
+      var selectedYear = document.getElementById("yearSelect").value;
+      console.log("Selected Year:", selectedYear);
+
+      // Close the modal after selecting a year
+      modal.style.display = "none";
+  });
 });
 
 // our api for grabing team standings data
@@ -164,3 +163,40 @@ function fetchTeamStandings(data) {
     teamInfoElement.innerHTML = 'No statistics available for this team and year.';
   }
 }
+
+
+function fetchNbaBasketballGifs(apiKey, searchTerm) {
+  // URL for gif request thr9ough the api
+  var giphyApiUrl = `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&&api_key=${giphyApiKey}`;
+
+  //API request using the fetch function
+  return fetch(giphyApiUrl)
+    .then((response) => {
+      // Checks for our response 200 which means it is working
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse the JSON response
+      return response.json();
+    })
+    .then((data) => {
+      // Extract the GIFs from the response data
+      var gifs = data.data.map((gif) => gif.images.original.url);
+
+      return gifs;
+    })//if we arent able to pull anything displays our error
+    .catch((error) => {
+      console.error('Error fetching NBA basketball GIFs:', error);
+    });
+}
+
+///usage for the key and our search term just nba baskertball
+var giphyApiKey = 'ehhVqXyAm0xa78JH81Upx5S2xknqbRjl';
+var searchTerm = 'NBA basketball';
+
+
+fetchNbaBasketballGifs(giphyApiKey, searchTerm)
+  .then((gifs) => {
+    console.log('NBA basketball GIFs:', gifs);
+  });

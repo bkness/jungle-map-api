@@ -25,3 +25,8 @@ To run this application, simply open the index.html file in your preferred web b
 Here is a project screenshot of our application:![_Users_brandonkelly_Desktop_NBA-Standings_index html](https://github.com/bkness/jungle-map-api/assets/123907755/682710a2-8108-4fda-8169-d588e6253d76)
 
 *Note: This application is not affiliated with the NBA or any of its teams. It is a demonstration project for educational purposes.*
+
+
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
