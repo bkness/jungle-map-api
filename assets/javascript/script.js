@@ -65,22 +65,6 @@ function createTeamButtons() {
       var teamId = this.dataset.teamid;
       // searches a team id  in the api hen a button is clicked 
       searchTeamStandings(teamId);
-
-      //Moved this to this position so when the team button is clicked it will genrate and display the gif simoltaneously and change when a new one is also
-      fetchNbaBasketballGifs(giphyApiKey, searchTerm)
-  .then((gifs) => {
-    console.log('NBA basketball GIFs:', gifs);
-    var randomIndex = Math.floor(Math.random()*gifs.length);
-    var image = gifs[randomIndex];
-    var imageEl = document.createElement('img');
-    imageEl.src = image;
-   
-    document.getElementById('gif-image').innerHTML = "";
-    document.getElementById('gif-image').append(imageEl);
-
-
-
-  });
     });
   });
 }
@@ -90,34 +74,33 @@ function createTeamButtons() {
 document.addEventListener('DOMContentLoaded', function () {
   console.log("DOM Loaded");
   createTeamButtons();
-  // WE NEED TO INCORPORATE A YEAR FUNCTION TO MAKE OUR STANDINGS DISPLAY STANDINGS FOR YEAR SELECTED WITH MODAL
-  // Get the modal
+
   var modal = document.getElementById("myModal");
-
-  // Get the button that opens the modal
   var btn = document.getElementById("yearSelector");
-
-  // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
+  var submitYearButton = document.getElementById("submitYear");
 
-  // When the user clicks the button, open the modal 
   btn.onclick = function () {
-    console.log("button has been clickethed");
-    modal.style.display = "block";
+      modal.style.display = "block";
   }
 
-  // When the user clicks on <span> (x), close the modal
   span.onclick = function () {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
       modal.style.display = "none";
-    }
   }
 
+  window.onclick = function (event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+  submitYearButton.addEventListener('click', function () {
+      var selectedYear = document.getElementById("yearSelect").value;
+      console.log("Selected Year:", selectedYear);
+
+      // Close the modal after selecting a year
+      modal.style.display = "none";
+  });
 });
 
 // our api for grabing team standings data
@@ -176,15 +159,13 @@ function fetchTeamStandings(data) {
        `;
 
     teamInfoElement.innerHTML = teamInfoHTML;
-
-    
   } else {
     teamInfoElement.innerHTML = 'No statistics available for this team and year.';
   }
 }
 
 
-function fetchNbaBasketballGifs(giphyApiKey, searchTerm) {
+function fetchNbaBasketballGifs(apiKey, searchTerm) {
   // URL for gif request thr9ough the api
   var giphyApiUrl = `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&&api_key=${giphyApiKey}`;
 
@@ -215,4 +196,7 @@ var giphyApiKey = 'ehhVqXyAm0xa78JH81Upx5S2xknqbRjl';
 var searchTerm = 'NBA basketball';
 
 
-
+fetchNbaBasketballGifs(giphyApiKey, searchTerm)
+  .then((gifs) => {
+    console.log('NBA basketball GIFs:', gifs);
+  });
