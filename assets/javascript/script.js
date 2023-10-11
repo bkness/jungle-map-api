@@ -1,4 +1,6 @@
 // added an array to use with the dynamically created buttons   
+  
+var selectedYear = 2022;
 
 var nbaTeams = [
   { id: 1, name: 'Atlanta Hawks', nickname: 'Hawks', code: 'ATL', city: 'Atlanta' },
@@ -50,6 +52,10 @@ function createTeamButtons() {
       case 'BKN':
         button.style.backgroundImage = `url('./assets/images/${'BKN'.toLowerCase()}_photo.avif')`;
         break;
+        case 'CHA':
+          button.style.backgroundImage = `url('./assets/images/${'CHA'.toLowerCase()}_photo.avif')`;
+          break;
+
 
       default:
         button.style.backgroundImage = 'url(./assets/images/default_photo.avif)';
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var modal = document.getElementById("myModal");
   var btn = document.getElementById("yearSelector");
   var span = document.getElementsByClassName("close")[0];
-  var submitYearButton = document.getElementById("submitYear");
+  var submitYearButton = document.getElementById("submitYear"); // Corrected this line
 
   btn.onclick = function () {
       modal.style.display = "block";
@@ -95,8 +101,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   submitYearButton.addEventListener('click', function () {
-      var selectedYear = document.getElementById("yearSelect").value;
-      console.log("Selected Year:", selectedYear);
+      var newSelectedYear = document.getElementById("yearSelect").value;
+      console.log("Selected Year:", newSelectedYear);
+
+selectedYear = newSelectedYear;
 
       // Close the modal after selecting a year
       modal.style.display = "none";
@@ -105,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // our api for grabing team standings data
 async function searchTeamStandings(teamId) {
-  var teamUrl = `https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2022&team=${teamId}`;
+  var teamUrl = `https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=${selectedYear}&team=${teamId}`;
   var options = {
     method: 'GET',
     headers: {
@@ -130,6 +138,7 @@ function fetchTeamStandings(data) {
   if (data && data.response && data.response.length > 0) {
     var standings = data.response[0];
 
+    var seasonYear = data.parameters.season;
     var teamName = standings.team ? standings.team.name : 'N/A';
     var teamLogoUrl = standings.team ? standings.team.logo : 'N/A';
     var teamNickname = standings.team ? standings.team.nickname : 'N/A';
@@ -145,9 +154,10 @@ function fetchTeamStandings(data) {
     // here we dynamically create a spot on our html that our accessed data can be incorporated with
     var teamInfoHTML = `
     <div class="center-content">     
-    <h2 class="center-text">${teamName}</h2>
+     <h2 class="center-text">${teamName}</h2>
         <img class="center-img" src="${teamLogoUrl}" alt="${teamName} Logo">
-       <p class="center-text"> Team Nickname: ${teamNickname}<p>
+        <p class="center-text">${seasonYear}<p>
+        <p class="center-text"> Team Nickname: ${teamNickname}<p>
        <p class="center-text">Season Rank: ${seasonRank}
        <p class="center-text">Season Wins: ${winsAll}<p>
         <p class="center-text">Games Won at Home: ${winsHome}<p>
