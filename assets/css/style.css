@@ -53,6 +53,11 @@
    animation-duration: 0.4s;
  }
 
+ .stats-container {
+  width: 80%; /* Adjust this value as needed */
+  margin: 0 auto; /* This centers the container on the page */
+}
+ 
  /* Add Animation */
  @-webkit-keyframes animatetop {
    from {
@@ -93,6 +98,10 @@
    cursor: pointer;
  }
 
+#scroll {
+  overflow-y: scroll;
+}
+
  .modal-header {
    background-position: center top;
    background-size: cover;
@@ -116,4 +125,12 @@
    text-align: center;
    margin-right: 13px;
    height: 80%;
+ }
+
+ @media screen and (max-width:800px) {
+  #body {
+    justify-content: flex-end;
+    flex-direction: column-reverse;
+    height: 50%;
+  }
  }
