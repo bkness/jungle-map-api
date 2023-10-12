@@ -138,9 +138,10 @@ document.addEventListener('DOMContentLoaded', function () {
   submitYearButton.addEventListener('click', function () {
       var newSelectedYear = document.getElementById("yearSelect").value;
       console.log("Selected Year:", newSelectedYear);
+      
 
 selectedYear = newSelectedYear;
-
+localStorage.setItem("selectedYear", selectedYear);
       // Close the modal after selecting a year
       modal.style.display = "none";
   });
