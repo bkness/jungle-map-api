@@ -55,7 +55,7 @@ function createTeamButtons() {
         case 'CHA':
           button.style.backgroundImage = `url('./assets/images/${'CHA'.toLowerCase()}_photo.avif')`;
           break;
-
+        
 
       default:
         button.style.backgroundImage = 'url(./assets/images/default_photo.avif)';

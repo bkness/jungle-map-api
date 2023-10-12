@@ -15,6 +15,7 @@
    font-family: sans-serif;
    font-size: 40px;
    background-size: cover;
+   width: 100%;
  }
 
  /* The Modal (background) */
@@ -53,8 +54,12 @@
    animation-duration: 0.4s;
  }
 
+#team-info {
+  height: 100%;
+}
+
  .stats-container {
-  width: 80%; /* Adjust this value as needed */
+  width: 100%; /* Adjust this value as needed */
   margin: 0 auto; /* This centers the container on the page */
 }
  
@@ -83,6 +88,40 @@
    }
  }
 
+#gif-display {
+  margin-top: 8px;
+}
+
+#yearSelector {
+  font-size: 1.2em; /* Increase font size */
+  padding: 10px 20px; /* Add some padding to make the button larger */
+  background-color: #007bff; /* Change background color */
+  color: #fff; /* Change text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer;
+}
+
+#yearSelector:hover {
+  background-color: #0056b3; /* Change background color on hover */
+}
+  
+/* Add the custom CSS code here */
+    #yearSelector {
+      font-size: 1.5em;
+      padding: 10px 20px;
+      background-color: #ab2b1f;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #yearSelector:hover {
+      background-color: #7e2219;
+    }
+
  /* The Close Button */
  .close {
    color: white;
@@ -100,6 +139,15 @@
 
 #scroll {
   overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+#scroll::-webkit-scrollbar{
+  width: 12px;
+}
+
+#scroll::-webkit-scrollbar-thumb {
+  background-color: #888;
 }
 
  .modal-header {
@@ -132,5 +180,10 @@
     justify-content: flex-end;
     flex-direction: column-reverse;
     height: 50%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .team-button {
+    width: 100%;
   }
  }
