@@ -1,5 +1,5 @@
 // added an array to use with the dynamically created buttons   
-  
+// variable for our default year
 var selectedYear = 2022;
 
 var nbaTeams = [
@@ -56,16 +56,16 @@ function createTeamButtons() {
           button.style.backgroundImage = `url('./assets/images/${'CHA'.toLowerCase()}_photo.avif')`;
           break;
         
-
+      // creates buttons for buttons with no image created
       default:
         button.style.backgroundImage = 'url(./assets/images/default_photo.avif)';
     }
-
+    // Creating a team button dynamically 
     button.classList.add('team-button');
     button.dataset.teamid = team.id;
     button.innerText = team.name;
     teamContainer.appendChild(button);
-
+    //  creates the event listener that adds our teamId into the api
     button.addEventListener('click', function () {
       console.log('click');
       var teamId = this.dataset.teamid;
@@ -114,38 +114,43 @@ function createTeamButtons() {
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log("DOM Loaded");
+
+  // Retrieve selectedYear from local storage
+  var storedYear = localStorage.getItem("selectedYear");
+
+  // Use the stored year if available, or default to 2022
+  selectedYear = storedYear || 2022;
+
   createTeamButtons();
 
   var modal = document.getElementById("myModal");
   var btn = document.getElementById("yearSelector");
   var span = document.getElementsByClassName("close")[0];
-  var submitYearButton = document.getElementById("submitYear"); // Corrected this line
-
+  var submitYearButton = document.getElementById("submitYear");
+  // on click our modal performs correctly 
   btn.onclick = function () {
-      modal.style.display = "block";
+    modal.style.display = "block";
   }
 
   span.onclick = function () {
-      modal.style.display = "none";
+    modal.style.display = "none";
   }
 
   window.onclick = function (event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-  }
-
-  submitYearButton.addEventListener('click', function () {
-      var newSelectedYear = document.getElementById("yearSelect").value;
-      console.log("Selected Year:", newSelectedYear);
-      
-
-selectedYear = newSelectedYear;
-localStorage.setItem("selectedYear", selectedYear);
-      // Close the modal after selecting a year
+    if (event.target == modal) {
       modal.style.display = "none";
+    }
+  }
+  // submits the year and then grabs the value to be used 
+  submitYearButton.addEventListener('click', function () {
+    var newSelectedYear = document.getElementById("yearSelect").value;
+    console.log("Selected Year:", newSelectedYear);
+    selectedYear = newSelectedYear;
+    localStorage.setItem("selectedYear", selectedYear);
+    modal.style.display = "none";
   });
 });
+
 
 // our api for grabing team standings data
 async function searchTeamStandings(teamId) {
